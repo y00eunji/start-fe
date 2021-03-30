@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #board{
+            width: 400px;
+            border: 5px solid gray;
+            height: 400px;
+        }
+        span{
+            width: 100px;
+            height: 100px;
+            display: block;
+            float: left;
+        }
+        .black{
+            background-color: black;
+        }
+        .white{
+            background-color: white;
+        }
+        .red{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>source</title>
+</head>
+<body>
+
+<div id="board">
+</div>
+<script>
+    var $board = document.getElementById("board");
+    var str ='';
+    var isWhite =false;
+    var className = '';
+    var $target = null;
+
+    for(var i=0; i<16; i++){
+        className = (isWhite) ? 'white' : 'black';
+        str += '<span class ="' + className + '"></span>';
+        isWhite = !isWhite;
+        if(i%4 === 3){
+            isWhite = !isWhite;
+        }
+    }
+
+    $board.innerHTML = str;
+
+    var $boards = document.querySelectorAll('span');
+
+    $boards.forEach(block => {
+        block.addEventListener('click', toRed);
+    })
+
+    function toRed(event){
+        if($target){
+            $target.classList.remove('red');
+        }
+        $target = event.target;
+        $target.classList.add('red');
+    }
+</script>
+</body>
+</html>
+</body>
+</html>
