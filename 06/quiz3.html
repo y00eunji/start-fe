@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>DOM</title>
+    <style>
+        body {
+            padding: 10px;
+        }
+        .box {
+            width: 100px;
+            height: 30px;
+            background-color: #ddd;
+        }
+        .red {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <input type="text" class="txt" value="hello" />
+    <button class="text-btn">TEXT 넣기</button>
+    <br />
+    <button class="add-red">빨간색으로</button>
+    <button class="add-btn">추가</button>
+    <button class="delete-btn">삭제</button>
+    <button class="reset-btn">초기화</button>
+    <button class="toggle-btn">보이기,숨기기 토글</button>
+    <button class="image-btn">이미지</button>
+</div>
+<div class="box"></div>
+
+<script>
+   $addred = document.querySelector(".add-red");
+   $addbtn = document.querySelector(".add-btn");
+   $delete = document.querySelector(".delete-btn");
+   $reset = document.querySelector(".reset-btn");
+   $toggle = document.querySelector(".toggle-btn");
+   $image = document.querySelector(".image-btn");
+   $text = document.querySelector(".text-btn");
+
+   $addred.addEventListener("click", () => {
+       const allbox = document.querySelectorAll('.box');
+       allbox.forEach(box => box.classList.add("red"));
+   })
+
+   $addbtn.addEventListener("click", () => {
+       const newbox = document.createElement('div');
+       newbox.classList.add("box");
+       document.body.appendChild(newbox);
+   })
+
+   $delete.addEventListener("click", () => {
+       const allbox = document.querySelectorAll('.box');
+       if (allbox.length === 0) return;
+       allbox[allbox.length-1].remove();
+   })
+
+   $text.addEventListener("click", () => {
+       const allbox = document.querySelectorAll('.box');
+       const text = document.querySelector('.txt').value;
+       allbox.forEach(box => box.innerHTML = text);
+   })
+
+   $reset.addEventListener("click", () => {
+       const allbox = document.querySelectorAll('.box');
+       allbox.forEach(box => box.remove());
+
+   })
+
+   $toggle.addEventListener("click", () => {
+       const allbox = document.querySelectorAll('.box');
+       if(allbox.length === 0) return;
+       if(allbox[0].style.visibility === "hidden") {
+           allbox.forEach(box => box.style.visibility = "visible");
+       }
+       else {
+           allbox.forEach(box => box.style.visibility = "hidden");
+       }
+   })
+
+   $image.addEventListener("click", () => {
+       const allbox = document.querySelector('.box');
+       const img = " https://i.imgur.com/69NjYBH.png";
+       const addimg = `<img src=${img}>`;
+       console.log(allbox);
+       if(allbox === null){
+           const newbox = document.createElement('div');
+           newbox.classList.add("box");
+           newbox.innerHTML = addimg;
+           document.body.appendChild(newbox);
+           return
+       }
+       allbox.innerHTML = addimg;
+
+   })
+</script>
+
+</body>
+</html>
