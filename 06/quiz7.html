@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Game</title>
+    <style>
+        .box {
+            border: 1px solid black;
+            /* border-width: 1px;
+      border-style: solid;
+      border-color: #fff; */
+            width: 400px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        #bug {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            position: absolute;
+            top: 35px;
+            left: 35px;
+            cursor: pointer;
+        }
+        .wrap {
+            margin: 10px auto;
+            width: 500px;
+        }
+        #point,
+        #life {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+    <ul>
+        <li>빨간타겟이 box영역에서만 랜덤으로 출현</li>
+        <li>빨간타겟을 클릭하면 점수 +1</li>
+        <li>빨간타겟을 클릭못하면 생명 -1</li>
+        <li>생명이 0이면 gameover 메세지 출력</li>
+    </ul>
+    <div>점수 <span id="point">0</span></div>
+    <div>생명 <span id="life">10</span></div>
+
+    <div class="box">
+        <div id="bug"></div>
+    </div>
+</div>
+<script>
+
+    const $bug = document.getElementById('bug');
+    const $point = document.getElementById('point');
+    const $life = document.getElementById('life');
+    const $box = document.querySelector('.box');
+    let npoint;
+    let nlife;
+
+
+
+    function start(){
+        nlife = 10;
+        npoint= 0;
+        $bug.addEventListener('click', wellclick);
+        $box.addEventListener('click', missclick);
+    }
+    start();
+    function random(inbox){
+        return Math.floor(inbox * Math.random());
+    }
+
+    function game(){
+       const x = random($box.offsetLeft - $bug.offsetLeft);
+       const y = random($box.offsetHeight - $bug.offsetHeight);
+        $bug.style.left = `${x}px`; // box 안에서 움직이는 bug의 랜덤 위치 X 값
+        $bug.style.top = `${y}px`;
+    }
+
+    function wellclick(event){
+        game();
+        npoint++;
+        $point.innerHTML = npoint;
+        event.stopPropagation();
+    }
+    function  missclick(){
+        game();
+        nlife--;
+        $life.innerHTML = nlife;
+        if (nlife === 0){
+            alert('GAMEOVER');
+            start();
+        }
+
+    }
+
+
+</script>
+</body>
+</html>
+
