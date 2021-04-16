@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+            left: 200px;
+            top: 200px;
+            line-height: 100px;
+            text-align: center;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="box">Drag me!</div>
+
+<script>
+    const $box = document.getElementById('box');
+    let x = 0, y = 0;
+    let isDown = false;
+
+    function boxdown(e){
+        isDown = true;
+        x = $box.offsetLeft - e.clientX;
+        y = $box.offsetTop - e.clientY;
+    };
+
+    function boxup(){
+        isDown = false;
+    };
+
+    function boxmov(e){
+        if (!isDown) return;
+            $box.style.left = x + e.clientX +  'px';
+            $box.style.top = y + e.clientY +  'px';
+            console.log(e.clientX, e.clientY);
+    };
+
+    document.addEventListener('mousedown',boxdown);
+    $box.addEventListener('mouseup', boxup);
+    document.addEventListener('mousemove', boxmov);
+
+</script>
+</body>
+
+
+
+
+
+
+</html>
