@@ -2,6 +2,7 @@ import './todos.css';
 
 import { render } from './html-render';
 import formInput from './form-input';
+import { loadData } from './data-manager';
 
 const $result = document.querySelector('#result');
 
