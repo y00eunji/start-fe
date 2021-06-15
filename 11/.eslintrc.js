@@ -5,6 +5,12 @@ module.exports = {
     es2021: true,
   },
   extends: 'eslint:recommended',
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+    React: true,
+    ReactDOM: true,
+  },
   parserOptions: {
     ecmaVersion: 12,
   },
@@ -13,6 +19,7 @@ module.exports = {
     'no-undef': 2,
   },
   parserOption: {
+    ecmaVersion: 12,
     sourceType: 'module',
   },
 };
